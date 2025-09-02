@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Frontend Color Scheme - Matching the main app frontend */
+    --background: 0 0% 100%; /* #FFFFFF – Pure White */
+    --foreground: 210 15% 20%; /* #333333 – Dark Charcoal */
+    --primary: 4 97% 69%; /* #FF6B6B – Vivid Coral */
+    --secondary: 174 54% 60%; /* #4ECDC4 – Bright Teal */
+    --accent: 50 100% 80%; /* #FFE66D – Warm Yellow */
+    --muted: 0 0% 40%; /* #666666 – Medium Gray */
+    --muted-foreground: 0 0% 40%; /* #666666 – Medium Gray */
+    --card: 210 20% 96%; /* #F3F4F6 – Whisper Gray */
+    --card-foreground: 210 15% 20%; /* #333333 – Dark Charcoal */
+    --popover: 210 20% 96%; /* #F3F4F6 – Whisper Gray */
+    --popover-foreground: 210 15% 20%; /* #333333 – Dark Charcoal */
+    --border: 174 54% 60%; /* #4ECDC4 – Bright Teal */
+    --input: 174 54% 60%; /* #4ECDC4 – Bright Teal */
+    --ring: 210 15% 20%; /* #333333 – Dark Charcoal */
+    --radius: 0.5rem;
+    
+    /* Other required variables */
+    --primary-foreground: 0 0% 100%; /* #FFFFFF – On Primary */
+    --secondary-foreground: 0 0% 100%; /* #FFFFFF – On Secondary */
+    --destructive: 0 84% 60%; /* #E53935 – Destructive */
+    --destructive-foreground: 0 0% 100%; /* #FFFFFF – On Destructive */
+    
+    /* Contest-specific colors */
+    --contest-primary: 4 97% 69%; /* #FF6B6B – Vivid Coral */
+    --contest-secondary: 174 54% 60%; /* #4ECDC4 – Bright Teal */
+    --contest-accent: 50 100% 80%; /* #FFE66D – Warm Yellow */
+    --contest-success: 142 76% 36%; /* #10B981 – Emerald Green */
+    --contest-warning: 38 92% 50%; /* #F59E0B – Amber */
+    --contest-info: 217 91% 60%; /* #3B82F6 – Blue */
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    
+    /* Contest-specific dark mode colors */
+    --contest-primary: 210 40% 98%;
+    --contest-secondary: 217.2 32.6% 17.5%;
+    --contest-accent: 217.2 32.6% 17.5%;
+    --contest-success: 142 76% 36%;
+    --contest-warning: 38 92% 50%;
+    --contest-info: 217 91% 60%;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+  }
+}
+
+@layer components {
+  .contest-gradient {
+    background: linear-gradient(135deg, hsl(var(--contest-primary)) 0%, hsl(var(--contest-secondary)) 50%, hsl(var(--contest-accent)) 100%);
+  }
+  
+  .contest-card {
+    @apply bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-200 dark:border-gray-800 p-6;
+  }
+  
+  .contest-button {
+    background-color: hsl(var(--contest-primary));
+    color: white;
+    @apply font-semibold py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  .contest-button:hover {
+    background-color: hsl(var(--contest-primary) / 0.9);
+  }
+  
+  .contest-button-secondary {
+    background-color: hsl(var(--contest-secondary));
+    color: white;
+    @apply font-semibold py-2 px-4 rounded-lg transition-colors duration-200;
+  }
+  
+  .contest-button-secondary:hover {
+    background-color: hsl(var(--contest-secondary) / 0.9);
+  }
+  
+  /* Frontend-style color utilities */
+  .bg-frontend-primary {
+    background-color: hsl(var(--primary));
+  }
+  
+  .bg-frontend-secondary {
+    background-color: hsl(var(--secondary));
+  }
+  
+  .bg-frontend-accent {
+    background-color: hsl(var(--accent));
+  }
+  
+  .bg-frontend-success {
+    background-color: hsl(var(--contest-success));
+  }
+  
+  .bg-frontend-warning {
+    background-color: hsl(var(--contest-warning));
+  }
+  
+  .bg-frontend-info {
+    background-color: hsl(var(--contest-info));
+  }
+  
+  .text-frontend-primary {
+    color: hsl(var(--primary));
+  }
+  
+  .text-frontend-secondary {
+    color: hsl(var(--secondary));
+  }
+  
+  .text-frontend-accent {
+    color: hsl(var(--accent));
+  }
+  
+  .text-frontend-success {
+    color: hsl(var(--contest-success));
+  }
+  
+  .text-frontend-warning {
+    color: hsl(var(--contest-warning));
+  }
+  
+  .text-frontend-info {
+    color: hsl(var(--contest-info));
+  }
+  
+  .border-frontend-primary {
+    border-color: hsl(var(--primary));
+  }
+  
+  .border-frontend-secondary {
+    border-color: hsl(var(--secondary));
+  }
+}
