@@ -1,5 +1,6 @@
-@import "tailwindcss/preflight";
-@import "tailwindcss/utilities";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Light mode theme tokens - EXACTLY matching main app */
 :root {
@@ -94,23 +95,23 @@
   --contest-info: 217 91% 60%;
 }
 
-/* Base styles */
-* {
-  border-color: hsl(var(--border));
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+  }
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
-  font-family: var(--font-sans);
-}
-
-/* Component styles */
+@layer components {
   /* Contest Hero Background - Matching main app gradient */
   .contest-hero-bg {
     background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
@@ -325,7 +326,8 @@ body {
     border-color: hsl(var(--secondary));
   }
 
-/* Minimalist utility classes */
-.text-balance {
-  text-wrap: balance;
+  /* Minimalist utility classes */
+  .text-balance {
+    text-wrap: balance;
+  }
 }
