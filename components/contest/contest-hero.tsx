@@ -29,7 +29,7 @@ export function ContestHero() {
           </h1>
           
           <p className="text-xl md:text-2xl font-light mb-12 max-w-2xl mx-auto leading-relaxed opacity-90">
-            Discover and share your city's best-kept secrets. Win up to $25,000.
+            Discover and share your city's best-kept secrets. Win up to $5,000.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

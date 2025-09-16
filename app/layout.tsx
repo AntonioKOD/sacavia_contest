@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://vote.sacavia.com',
     title: 'Hidden Gems Contest - Vote for Amazing Local Places',
-    description: 'Discover and vote for the best hidden gems in your city. Win up to $25,000 in prizes.',
+    description: 'Discover and vote for the best hidden gems in your city. Win up to $5,000 in prizes.',
     siteName: 'Hidden Gems Contest',
     images: [
       {
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Hidden Gems Contest - Vote for Amazing Local Places',
-    description: 'Discover and vote for the best hidden gems in your city. Win up to $25,000 in prizes.',
+    description: 'Discover and vote for the best hidden gems in your city. Win up to $5,000 in prizes.',
   },
 };
 
