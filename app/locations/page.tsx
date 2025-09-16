@@ -1,5 +1,4 @@
 import { Suspense } from 'react';
-import { fetchEntries } from '@/lib/core';
 import { ContestEntriesList } from '../leaderboard/contest-entries-list';
 import { ContestEntriesSkeleton } from '../leaderboard/contest-entries-skeleton';
 

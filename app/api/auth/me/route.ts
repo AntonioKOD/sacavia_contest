@@ -21,7 +21,7 @@ export async function GET(request: NextRequest) {
           user: null,
           message: 'Not authenticated' 
         },
-        { status: 401 }
+        { status: 200 } // Return 200 instead of 401 to avoid CORS issues
       );
     }
 
@@ -50,7 +50,7 @@ export async function GET(request: NextRequest) {
         error: 'Authentication check failed',
         details: errorMessage 
       },
-      { status: 500 }
+      { status: 200 } // Return 200 instead of 500 to avoid CORS issues
     );
   }
 }
