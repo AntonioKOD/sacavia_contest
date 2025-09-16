@@ -8,6 +8,7 @@ import { Navigation } from '@/components/navigation';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_CONTEST_APP_URL || 'https://vote.sacavia.com'),
   title: 'Hidden Gems Contest - Vote for Amazing Local Places',
   description: 'Discover and vote for the best hidden gems in your city. Win up to $25,000 in prizes.',
   keywords: 'hidden gems, contest, local places, voting, prizes, sacavia, community',
@@ -44,7 +45,11 @@ export const metadata: Metadata = {
     title: 'Hidden Gems Contest - Vote for Amazing Local Places',
     description: 'Discover and vote for the best hidden gems in your city. Win up to $25,000 in prizes.',
   },
-  viewport: 'width=device-width, initial-scale=1',
+};
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
   themeColor: '#FF6B6B',
 };
 
