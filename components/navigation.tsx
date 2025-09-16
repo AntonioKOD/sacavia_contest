@@ -2,116 +2,115 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Trophy, MapPin, Users, Award } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { useState } from 'react';
+import { Trophy, MapPin, Award } from 'lucide-react';
+import {
+  Navbar,
+  NavBody,
+  NavItems,
+  MobileNav,
+  MobileNavHeader,
+  MobileNavMenu,
+  MobileNavToggle,
+  NavbarButton,
+} from '@/components/ui/resizable-navbar';
 
 export function Navigation() {
   const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navItems = [
     {
-      href: '/',
-      label: 'Home',
-      icon: Trophy,
+      name: 'Home',
+      link: '/',
     },
     {
-      href: '/leaderboard',
-      label: 'Leaderboard',
-      icon: Award,
+      name: 'Entries',
+      link: '/leaderboard',
     },
     {
-      href: '/how-to-enter',
-      label: 'How to Enter',
-      icon: MapPin,
+      name: 'Enter',
+      link: '/how-to-enter',
     },
   ];
 
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   return (
-    <nav className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 sticky top-0 z-50">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <Trophy className="w-8 h-8 text-frontend-primary" />
-            <span className="text-xl font-bold text-gray-900 dark:text-white">
-              Hidden Gems Contest
-            </span>
+    <Navbar>
+      {/* Desktop Navigation */}
+      <NavBody>
+        {/* Logo */}
+        <Link href="/" className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black dark:text-white">
+          <img src="/logo.svg" alt="Sacavia" className="w-10 h-10" />
+        </Link>
+
+        {/* Navigation Items */}
+        <NavItems items={navItems} />
+
+        {/* CTA Button */}
+        <NavbarButton
+          href="https://sacavia.com/add-location"
+          variant="primary"
+          className="bg-[#FF6B6B] hover:bg-[#e55a5a] text-white shadow-lg border-2 border-[#FF6B6B] hover:border-[#e55a5a] transition-all duration-200"
+        >
+          Enter Contest
+        </NavbarButton>
+      </NavBody>
+
+      {/* Mobile Navigation */}
+      <MobileNav>
+        <MobileNavHeader>
+          {/* Mobile Logo */}
+          <Link href="/" className="flex items-center space-x-2 px-2 py-1 text-sm font-bold text-black dark:text-white">
+            <img src="/logo.svg" alt="Sacavia" className="w-6 h-6" />
+            <span>Hidden Gems Contest</span>
           </Link>
 
-          {/* Navigation Links */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = pathname === item.href;
-              
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors duration-200 ${
-                    isActive
-                      ? 'bg-frontend-primary text-white'
-                      : 'text-gray-600 dark:text-gray-300 hover:text-frontend-primary hover:bg-frontend-primary/10'
-                  }`}
-                >
-                  <Icon className="w-4 h-4" />
-                  <span>{item.label}</span>
-                </Link>
-              );
-            })}
-          </div>
+          {/* Mobile Menu Toggle */}
+          <MobileNavToggle isOpen={isMobileMenuOpen} onClick={toggleMobileMenu} />
+        </MobileNavHeader>
 
-          {/* CTA Button */}
-          <div className="flex items-center space-x-4">
-            <Link
-              href="https://sacavia.com/add-location"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button className="bg-frontend-primary hover:bg-frontend-primary/90 text-white">
-                <MapPin className="w-4 h-4 mr-2" />
-                Enter Contest
-              </Button>
-            </Link>
-          </div>
-        </div>
-
-        {/* Mobile Navigation */}
-        <div className="md:hidden py-4 border-t border-gray-200 dark:border-gray-800">
-          <div className="flex flex-col space-y-2">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = pathname === item.href;
-              
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors duration-200 ${
-                    isActive
-                      ? 'bg-frontend-primary text-white'
-                      : 'text-gray-600 dark:text-gray-300 hover:text-frontend-primary hover:bg-frontend-primary/10'
-                  }`}
-                >
-                  <Icon className="w-5 h-5" />
-                  <span>{item.label}</span>
-                </Link>
-              );
-            })}
+        {/* Mobile Menu */}
+        <MobileNavMenu isOpen={isMobileMenuOpen} onClose={closeMobileMenu}>
+          {navItems.map((item) => {
+            const isActive = pathname === item.link;
             
-            {/* Mobile CTA */}
-            <Link
-              href="https://sacavia.com/add-location"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center space-x-3 px-3 py-2 rounded-lg bg-frontend-primary text-white hover:bg-frontend-primary/90 transition-colors duration-200"
-            >
-              <MapPin className="w-5 h-5" />
-              <span>Enter Contest</span>
-            </Link>
-          </div>
-        </div>
-      </div>
-    </nav>
+            return (
+              <Link
+                key={item.link}
+                href={item.link}
+                onClick={closeMobileMenu}
+                className={`w-full px-4 py-3 rounded-lg transition-colors duration-200 ${
+                  isActive
+                    ? 'bg-frontend-primary text-white'
+                    : 'text-gray-600 dark:text-gray-300 hover:text-frontend-primary hover:bg-frontend-primary/10'
+                }`}
+              >
+                {item.name}
+              </Link>
+            );
+          })}
+          
+          {/* Mobile CTA */}
+          <Link
+            href="https://sacavia.com/add-location"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={closeMobileMenu}
+            className="w-full px-4 py-3 rounded-lg bg-frontend-primary text-white hover:bg-frontend-primary/90 transition-colors duration-200 text-center font-semibold"
+          >
+            <MapPin className="w-4 h-4 mr-2 inline" />
+            Enter Contest
+          </Link>
+        </MobileNavMenu>
+      </MobileNav>
+    </Navbar>
   );
 }

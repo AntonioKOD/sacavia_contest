@@ -1,9 +1,9 @@
 import { Suspense } from 'react';
 import { fetchEntries } from '@/lib/core';
-import { ContestEntriesList } from './contest-entries-list';
-import { ContestEntriesSkeleton } from './contest-entries-skeleton';
+import { ContestEntriesList } from '../leaderboard/contest-entries-list';
+import { ContestEntriesSkeleton } from '../leaderboard/contest-entries-skeleton';
 
-interface LeaderboardPageProps {
+interface LocationsPageProps {
   searchParams: Promise<{
     cursor?: string;
     limit?: string;
@@ -12,9 +12,9 @@ interface LeaderboardPageProps {
   }>;
 }
 
-export default async function LeaderboardPage({ searchParams }: LeaderboardPageProps) {
+export default async function LocationsPage({ searchParams }: LocationsPageProps) {
   const params = await searchParams;
-  const limit = Math.min(parseInt(params.limit || '24'), 50);
+  const limit = Math.min(parseInt(params.limit || '48'), 100);
   const { cursor, city, q } = params;
 
   return (
@@ -23,17 +23,17 @@ export default async function LeaderboardPage({ searchParams }: LeaderboardPageP
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-light text-gray-900 mb-6">
-            All Entries
+            All Locations
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Discover and vote for amazing hidden gems from our community
+            Explore all hidden gems and local discoveries from our community
           </p>
         </div>
 
         {/* Search and Filters */}
         <div className="mb-12">
           <div className="bg-gray-50 rounded-lg p-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
               <div>
                 <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-2">
                   City
@@ -56,9 +56,23 @@ export default async function LeaderboardPage({ searchParams }: LeaderboardPageP
                   id="search"
                   name="q"
                   defaultValue={q}
-                  placeholder="Search experiences..."
+                  placeholder="Search locations..."
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all duration-200 bg-white text-gray-900 placeholder-gray-500"
                 />
+              </div>
+              <div>
+                <label htmlFor="sort" className="block text-sm font-medium text-gray-700 mb-2">
+                  Sort By
+                </label>
+                <select
+                  id="sort"
+                  name="sort"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all duration-200 bg-white text-gray-900"
+                >
+                  <option value="newest">Newest First</option>
+                  <option value="popular">Most Popular</option>
+                  <option value="city">By City</option>
+                </select>
               </div>
               <div className="flex items-end">
                 <button

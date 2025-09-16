@@ -11,12 +11,12 @@ const config: Config = {
       colors: {
         // Frontend colors (matching main app frontend)
         frontend: {
-          primary: '#ff6b6b', // Vivid Coral
-          secondary: '#4ecdc4', // Bright Teal
-          accent: '#ffe66d', // Warm Yellow
-          success: '#10b981', // Emerald Green
-          warning: '#f59e0b', // Amber
-          info: '#3b82f6', // Blue
+          primary: '#FF6B6B', // Vivid Coral
+          secondary: '#4ECDC4', // Bright Teal
+          accent: '#FFE66D', // Warm Yellow
+          success: '#10B981', // Emerald Green
+          warning: '#F59E0B', // Amber
+          info: '#3B82F6', // Blue
         },
         // Contest app specific colors (using frontend palette)
         contest: {
@@ -25,8 +25,8 @@ const config: Config = {
           200: '#feb2b2',
           300: '#fc8181',
           400: '#f56565',
-          500: '#ff6b6b', // Primary coral
-          600: '#e53e3e',
+          500: '#FF6B6B', // Primary coral
+          600: '#e55a5a', // Darker coral for hover
           700: '#c53030',
           800: '#9b2c2c',
           900: '#742a2a',

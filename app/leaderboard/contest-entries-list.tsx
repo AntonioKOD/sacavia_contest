@@ -196,10 +196,10 @@ export function ContestEntriesList({
     <div>
       {/* Search Form */}
       <form onSubmit={handleSearch} className="mb-8">
-        <div className="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-6">
+        <div className="bg-gray-50 rounded-lg p-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div>
-              <label htmlFor="city" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-2">
                 City
               </label>
               <input
@@ -208,11 +208,11 @@ export function ContestEntriesList({
                 name="city"
                 defaultValue={initialCity}
                 placeholder="Filter by city..."
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-frontend-primary focus:border-transparent dark:bg-gray-800 dark:text-white"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all duration-200 bg-white text-gray-900 placeholder-gray-500"
               />
             </div>
             <div>
-              <label htmlFor="q" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="q" className="block text-sm font-medium text-gray-700 mb-2">
                 Search
               </label>
               <input
@@ -221,13 +221,13 @@ export function ContestEntriesList({
                 name="q"
                 defaultValue={initialQuery}
                 placeholder="Search experiences..."
-                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-frontend-primary focus:border-transparent dark:bg-gray-800 dark:text-white"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all duration-200 bg-white text-gray-900 placeholder-gray-500"
               />
             </div>
             <div className="flex items-end">
               <button
                 type="submit"
-                className="w-full contest-button px-6 py-2 text-lg font-semibold rounded-lg"
+                className="w-full bg-black text-white px-6 py-3 text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors duration-200"
               >
                 Search
               </button>
@@ -237,11 +237,11 @@ export function ContestEntriesList({
       </form>
 
       {/* Entries Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
         {entries.map((entry) => (
           <div
             key={entry.experienceId}
-            className="contest-card hover:shadow-xl transition-shadow duration-300 cursor-pointer group"
+            className="group cursor-pointer"
           >
             {/* Thumbnail */}
             <div className="relative mb-4">
@@ -249,75 +249,66 @@ export function ContestEntriesList({
                 <img
                   src={entry.thumbnailUrl}
                   alt={entry.title}
-                  className="w-full h-48 object-cover rounded-lg"
+                  className="w-full h-64 object-cover"
                 />
               ) : (
-                <div className="w-full h-48 bg-gradient-to-br from-frontend-primary/10 to-frontend-secondary/10 rounded-lg flex items-center justify-center">
-                  <div className="text-frontend-primary text-4xl font-bold">📸</div>
+                <div className="w-full h-64 bg-gray-100 flex items-center justify-center">
+                  <div className="text-gray-400 text-4xl">📸</div>
                 </div>
               )}
-              <div className="absolute top-3 right-3 bg-frontend-primary text-white px-3 py-1 rounded-full text-sm font-semibold">
-                Contest Entry
-              </div>
             </div>
 
             {/* Content */}
-            <div className="mb-4">
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-frontend-primary transition-colors duration-200">
+            <div className="space-y-3">
+              <h3 className="text-lg font-medium text-gray-900 group-hover:text-gray-600 transition-colors duration-200">
                 {entry.title}
               </h3>
-              <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
-                <MapPin className="w-4 h-4 mr-2" />
-                {entry.city}
-              </div>
-              <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
-                <Calendar className="w-4 h-4 mr-2" />
-                {new Date(entry.createdAt).toLocaleDateString()}
-              </div>
-              <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
-                <Heart className="w-4 h-4 mr-2" />
-                {entry.upvotesCount} upvotes
-              </div>
-            </div>
-
-            {/* Actions */}
-            <div className="flex items-center justify-between">
-              <a
-                href={entry.permalink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center text-sm text-frontend-primary hover:text-frontend-primary/80 transition-colors duration-200"
-              >
-                <Eye className="w-4 h-4 mr-1" />
-                View Details
-              </a>
               
-              {isAuthenticated ? (
-                <button
-                  onClick={() => handleVote(entry.experienceId)}
-                  disabled={votingStates[entry.experienceId]}
-                  className={`flex items-center px-4 py-2 text-sm font-semibold rounded-lg transition-colors duration-200 ${
-                    upvoteStates[entry.experienceId]?.upvoted
-                      ? 'bg-frontend-success text-white hover:bg-frontend-success/90'
-                      : 'contest-button'
-                  } disabled:opacity-50 disabled:cursor-not-allowed`}
-                >
-                  <Heart className={`w-4 h-4 mr-1 ${
-                    upvoteStates[entry.experienceId]?.upvoted ? 'fill-current' : ''
-                  }`} />
-                  {votingStates[entry.experienceId] 
-                    ? 'Voting...' 
-                    : upvoteStates[entry.experienceId]?.upvoted 
-                      ? 'Upvoted' 
-                      : 'Vote'
-                  }
-                </button>
-              ) : (
-                <LoginToVoteButton variant="outline" size="sm">
+              <div className="flex items-center justify-between text-sm text-gray-500">
+                <div className="flex items-center">
+                  <MapPin className="w-4 h-4 mr-1" />
+                  {entry.city}
+                </div>
+                <div className="flex items-center">
                   <Heart className="w-4 h-4 mr-1" />
-                  Vote
-                </LoginToVoteButton>
-              )}
+                  {entry.upvotesCount}
+                </div>
+              </div>
+
+              {/* Actions */}
+              <div className="flex items-center justify-between pt-2">
+                <a
+                  href={entry.permalink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-gray-600 hover:text-gray-900 transition-colors duration-200"
+                >
+                  View Details
+                </a>
+                
+                {isAuthenticated ? (
+                  <button
+                    onClick={() => handleVote(entry.experienceId)}
+                    disabled={votingStates[entry.experienceId]}
+                    className={`px-4 py-2 text-sm font-medium transition-colors duration-200 ${
+                      upvoteStates[entry.experienceId]?.upvoted 
+                        ? 'bg-gray-900 text-white' 
+                        : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
+                    } disabled:opacity-50 disabled:cursor-not-allowed`}
+                  >
+                    {votingStates[entry.experienceId] 
+                      ? 'Voting...' 
+                      : upvoteStates[entry.experienceId]?.upvoted 
+                        ? 'Voted' 
+                        : 'Vote'
+                    }
+                  </button>
+                ) : (
+                  <LoginToVoteButton variant="outline" size="sm">
+                    Vote
+                  </LoginToVoteButton>
+                )}
+              </div>
             </div>
           </div>
         ))}
@@ -329,7 +320,7 @@ export function ContestEntriesList({
           <button
             onClick={loadMore}
             disabled={isLoading}
-            className="contest-button-secondary px-8 py-3 text-lg font-semibold rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            className="bg-gray-100 text-gray-900 px-6 py-3 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isLoading ? 'Loading...' : 'Load More Entries'}
           </button>
@@ -339,8 +330,8 @@ export function ContestEntriesList({
       {/* Loading State */}
       {isLoading && (
         <div className="text-center py-8">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-frontend-primary mx-auto"></div>
-          <div className="text-gray-600 dark:text-gray-400 mt-4">Loading entries...</div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto"></div>
+          <div className="text-gray-600 mt-4">Loading entries...</div>
         </div>
       )}
     </div>

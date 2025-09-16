@@ -15,6 +15,14 @@ export const metadata: Metadata = {
   creator: 'Sacavia',
   publisher: 'Sacavia',
   robots: 'index, follow',
+  manifest: '/manifest.webmanifest',
+  icons: {
+    icon: [
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: '/icon-192.png',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -22,6 +30,14 @@ export const metadata: Metadata = {
     title: 'Hidden Gems Contest - Vote for Amazing Local Places',
     description: 'Discover and vote for the best hidden gems in your city. Win up to $25,000 in prizes.',
     siteName: 'Hidden Gems Contest',
+    images: [
+      {
+        url: '/logo.svg',
+        width: 1024,
+        height: 1024,
+        alt: 'Sacavia Logo',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
@@ -29,7 +45,7 @@ export const metadata: Metadata = {
     description: 'Discover and vote for the best hidden gems in your city. Win up to $25,000 in prizes.',
   },
   viewport: 'width=device-width, initial-scale=1',
-  themeColor: '#ed7a1a',
+  themeColor: '#FF6B6B',
 };
 
 export default function RootLayout({

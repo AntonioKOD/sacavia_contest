@@ -67,7 +67,7 @@ export function ContestGrid() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
               viewport={{ once: true }}
-              className="contest-card hover:shadow-xl transition-shadow duration-300 cursor-pointer group"
+              className="contest-card hover:shadow-2xl transition-all duration-300 cursor-pointer group hover:scale-105"
             >
               <div className="relative mb-4">
                 <div className="w-full h-48 bg-gradient-to-br from-frontend-primary/10 to-frontend-secondary/10 rounded-lg flex items-center justify-center">
@@ -102,7 +102,7 @@ export function ContestGrid() {
                 </div>
               </div>
 
-              <button className="w-full contest-button group-hover:bg-contest-600 transition-colors duration-200">
+              <button className="w-full contest-button group-hover:scale-105 transition-transform duration-200">
                 View Details
               </button>
             </motion.div>

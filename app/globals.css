@@ -1,75 +1,110 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "tw-animate-css";
 
-@layer base {
-  :root {
-    /* Frontend Color Scheme - Matching the main app frontend */
-    --background: 0 0% 100%; /* #FFFFFF – Pure White */
-    --foreground: 210 15% 20%; /* #333333 – Dark Charcoal */
-    --primary: 4 97% 69%; /* #FF6B6B – Vivid Coral */
-    --secondary: 174 54% 60%; /* #4ECDC4 – Bright Teal */
-    --accent: 50 100% 80%; /* #FFE66D – Warm Yellow */
-    --muted: 0 0% 40%; /* #666666 – Medium Gray */
-    --muted-foreground: 0 0% 40%; /* #666666 – Medium Gray */
-    --card: 210 20% 96%; /* #F3F4F6 – Whisper Gray */
-    --card-foreground: 210 15% 20%; /* #333333 – Dark Charcoal */
-    --popover: 210 20% 96%; /* #F3F4F6 – Whisper Gray */
-    --popover-foreground: 210 15% 20%; /* #333333 – Dark Charcoal */
-    --border: 174 54% 60%; /* #4ECDC4 – Bright Teal */
-    --input: 174 54% 60%; /* #4ECDC4 – Bright Teal */
-    --ring: 210 15% 20%; /* #333333 – Dark Charcoal */
-    --radius: 0.5rem;
-    
-    /* Other required variables */
-    --primary-foreground: 0 0% 100%; /* #FFFFFF – On Primary */
-    --secondary-foreground: 0 0% 100%; /* #FFFFFF – On Secondary */
-    --destructive: 0 84% 60%; /* #E53935 – Destructive */
-    --destructive-foreground: 0 0% 100%; /* #FFFFFF – On Destructive */
-    
-    /* Contest-specific colors */
-    --contest-primary: 4 97% 69%; /* #FF6B6B – Vivid Coral */
-    --contest-secondary: 174 54% 60%; /* #4ECDC4 – Bright Teal */
-    --contest-accent: 50 100% 80%; /* #FFE66D – Warm Yellow */
-    --contest-success: 142 76% 36%; /* #10B981 – Emerald Green */
-    --contest-warning: 38 92% 50%; /* #F59E0B – Amber */
-    --contest-info: 217 91% 60%; /* #3B82F6 – Blue */
-  }
+@plugin "tailwindcss-animate";
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    
-    /* Contest-specific dark mode colors */
-    --contest-primary: 210 40% 98%;
-    --contest-secondary: 217.2 32.6% 17.5%;
-    --contest-accent: 217.2 32.6% 17.5%;
-    --contest-success: 142 76% 36%;
-    --contest-warning: 38 92% 50%;
-    --contest-info: 217 91% 60%;
-  }
+@custom-variant dark (&:is(.dark *));
+
+/* Light mode theme tokens - EXACTLY matching main app */
+@theme inline {
+  /* Base colors - Matching main app exactly */
+  --color-primary: #ff6b6b; /* Vivid Coral – Primary Brand Accent */
+  --color-secondary: #4ecdc4; /* Bright Teal – Secondary Accent */
+  --color-accent: #ffe66d; /* Warm Yellow – Tertiary Accent */
+  --color-background: #ffffff; /* Pure White – Background */
+  --color-foreground: #333333; /* Dark Charcoal – Foreground */
+
+  /* Text Colors */
+  --color-text: #333333; /* Dark Charcoal – Text Base */
+  --color-text-muted: #666666; /* Medium Gray – Muted Text */
+
+  /* UI Colors */
+  --color-cta: #ff6b6b; /* Vivid Coral – Call‑to-Action */
+  --color-card: #f3f4f6; /* Whisper Gray – Card BG */
+  --color-card-alt: #ffffff; /* White – Alt Card BG */
+  --color-border: #4ecdc4; /* Bright Teal – Borders */
+
+  /* State Colors */
+  --color-success: #10b981; /* Emerald Green – Success */
+  --color-warning: #f59e0b; /* Amber – Warnings */
+  --color-info: #3b82f6; /* Blue – Info */
+  --color-surface: #ffffff; /* White – Surface */
+  --color-surface-hover: #f3f4f6; /* Very Light Gray – Hover */
+
+  /* Tailwind HSL variables - EXACTLY matching main app */
+  --background: 0 0% 100%; /* #FFFFFF – Pure White */
+  --foreground: 210 15% 20%; /* #333333 – Dark Charcoal */
+  --primary: 4 97% 69%; /* #FF6B6B – Vivid Coral */
+  --secondary: 174 54% 60%; /* #4ECDC4 – Bright Teal */
+  --accent: 50 100% 80%; /* #FFE66D – Warm Yellow */
+  --muted: 0 0% 40%; /* #666666 – Medium Gray */
+  --muted-foreground: 0 0% 40%; /* #666666 – Medium Gray */
+  --card: 210 20% 96%; /* #F3F4F6 – Whisper Gray */
+  --card-foreground: 210 15% 20%; /* #333333 – Dark Charcoal */
+  --popover: 210 20% 96%; /* #F3F4F6 – Whisper Gray */
+  --popover-foreground: 210 15% 20%; /* #333333 – Dark Charcoal */
+  --border: 174 54% 60%; /* #4ECDC4 – Bright Teal */
+  --input: 174 54% 60%; /* #4ECDC4 – Bright Teal */
+  --ring: 210 15% 20%; /* #333333 – Dark Charcoal */
+  --radius: 0.5rem;
+
+  /* Other required variables */
+  --primary-foreground: 0 0% 100%; /* #FFFFFF – On Primary */
+  --secondary-foreground: 0 0% 100%; /* #FFFFFF – On Secondary */
+  --destructive: 0 84% 60%; /* #E53935 – Destructive */
+  --destructive-foreground: 0 0% 100%; /* #FFFFFF – On Destructive */
+  --cta-foreground: 0 0% 100%; /* #FFFFFF – On CTA */
+
+  /* Contest-specific colors using main app palette */
+  --contest-primary: 4 97% 69%; /* #FF6B6B – Vivid Coral */
+  --contest-secondary: 174 54% 60%; /* #4ECDC4 – Bright Teal */
+  --contest-accent: 50 100% 80%; /* #FFE66D – Warm Yellow */
+  --contest-success: 142 76% 36%; /* #10B981 – Emerald Green */
+  --contest-warning: 38 92% 50%; /* #F59E0B – Amber */
+  --contest-info: 217 91% 60%; /* #3B82F6 – Blue */
+
+  /* Font settings - minimalist design */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+.dark {
+  --background: 222.2 84% 4.9%;
+  --foreground: 210 40% 98%;
+  --card: 222.2 84% 4.9%;
+  --card-foreground: 210 40% 98%;
+  --popover: 222.2 84% 4.9%;
+  --popover-foreground: 210 40% 98%;
+  --primary: 210 40% 98%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+  --secondary: 217.2 32.6% 17.5%;
+  --secondary-foreground: 210 40% 98%;
+  --muted: 217.2 32.6% 17.5%;
+  --muted-foreground: 215 20.2% 65.1%;
+  --accent: 217.2 32.6% 17.5%;
+  --accent-foreground: 210 40% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 210 40% 98%;
+  --border: 217.2 32.6% 17.5%;
+  --input: 217.2 32.6% 17.5%;
+  --ring: 212.7 26.8% 83.9%;
+
+  /* Contest-specific dark mode colors */
+  --contest-primary: 210 40% 98%;
+  --contest-secondary: 217.2 32.6% 17.5%;
+  --contest-accent: 217.2 32.6% 17.5%;
+  --contest-success: 142 76% 36%;
+  --contest-warning: 38 92% 50%;
+  --contest-info: 217 91% 60%;
 }
 
 @layer base {
   * {
     border-color: hsl(var(--border));
+  }
+  html, body {
+    margin: 0;
+    padding: 0;
   }
   body {
     background-color: hsl(var(--background));
@@ -78,88 +113,338 @@
 }
 
 @layer components {
-  .contest-gradient {
-    background: linear-gradient(135deg, hsl(var(--contest-primary)) 0%, hsl(var(--contest-secondary)) 50%, hsl(var(--contest-accent)) 100%);
+  /* Contest Hero Background - Matching main app gradient */
+  .contest-hero-bg {
+    background: linear-gradient(135deg, #FF6B6B 0%, #4ECDC4 100%);
   }
-  
+
+  /* Contest Cards - Modern design matching main app */
   .contest-card {
     @apply bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-200 dark:border-gray-800 p-6;
+    transition: all 0.3s ease;
   }
-  
+
+  .contest-card:hover {
+    @apply shadow-xl transform -translate-y-1;
+  }
+
+  /* Entry Cards - Specific styling for contest entries */
+  .entry-card {
+    @apply bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden;
+    transition: all 0.3s ease;
+  }
+
+  .entry-card:hover {
+    @apply shadow-xl transform -translate-y-1;
+  }
+
+  .entry-card-image {
+    @apply w-full h-48 object-cover;
+  }
+
+  .entry-card-content {
+    @apply p-4;
+  }
+
+  .entry-card-title {
+    @apply text-lg font-bold text-gray-900 dark:text-white mb-2;
+  }
+
+  .entry-card-meta {
+    @apply text-sm text-gray-500 dark:text-gray-400 mb-3;
+  }
+
+  .entry-card-votes {
+    @apply flex items-center justify-between;
+  }
+
+  /* Contest Buttons - Matching main app button styles */
   .contest-button {
-    background-color: hsl(var(--contest-primary));
+    background-color: #FF6B6B;
     color: white;
-    @apply font-semibold py-2 px-4 rounded-lg transition-colors duration-200;
+    @apply font-semibold py-3 px-6 rounded-lg transition-all duration-200;
+    box-shadow: 0 4px 14px 0 rgba(255, 107, 107, 0.3);
   }
-  
+
   .contest-button:hover {
-    background-color: hsl(var(--contest-primary) / 0.9);
+    background-color: #e55a5a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px 0 rgba(255, 107, 107, 0.4);
   }
-  
+
   .contest-button-secondary {
-    background-color: hsl(var(--contest-secondary));
+    background-color: #4ECDC4;
     color: white;
-    @apply font-semibold py-2 px-4 rounded-lg transition-colors duration-200;
+    @apply font-semibold py-3 px-6 rounded-lg transition-all duration-200;
+    box-shadow: 0 4px 14px 0 rgba(78, 205, 196, 0.3);
   }
-  
+
   .contest-button-secondary:hover {
-    background-color: hsl(var(--contest-secondary) / 0.9);
+    background-color: #3db8b0;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px 0 rgba(78, 205, 196, 0.4);
   }
-  
+
+  .contest-button-accent {
+    background-color: #FFE66D;
+    color: #1f2937;
+    @apply font-semibold py-3 px-6 rounded-lg transition-all duration-200;
+    box-shadow: 0 4px 14px 0 rgba(255, 230, 109, 0.3);
+  }
+
+  .contest-button-accent:hover {
+    background-color: #f4d93c;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px 0 rgba(255, 230, 109, 0.4);
+  }
+
+  /* Vote Button - Special styling for voting interface */
+  .vote-button {
+    @apply flex items-center justify-center w-12 h-12 rounded-full transition-all duration-200;
+    background-color: #FF6B6B;
+    color: white;
+    box-shadow: 0 4px 14px 0 rgba(255, 107, 107, 0.3);
+  }
+
+  .vote-button:hover {
+    background-color: #e55a5a;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px 0 rgba(255, 107, 107, 0.4);
+  }
+
+  .vote-button.voted {
+    background-color: #10B981;
+    box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.3);
+  }
+
+  .vote-button.voted:hover {
+    background-color: #059669;
+    box-shadow: 0 6px 20px 0 rgba(16, 185, 129, 0.4);
+  }
+
+  /* Leaderboard Styles */
+  .leaderboard-item {
+    @apply flex items-center justify-between p-4 bg-white dark:bg-gray-900 rounded-lg shadow-sm border border-gray-200 dark:border-gray-800;
+    transition: all 0.3s ease;
+  }
+
+  .leaderboard-item:hover {
+    @apply shadow-md transform -translate-y-1;
+  }
+
+  .leaderboard-rank {
+    @apply w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-sm;
+  }
+
+  .leaderboard-rank.first {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+  }
+
+  .leaderboard-rank.second {
+    background: linear-gradient(135deg, #C0C0C0, #A0A0A0);
+  }
+
+  .leaderboard-rank.third {
+    background: linear-gradient(135deg, #CD7F32, #B8860B);
+  }
+
+  .leaderboard-rank.other {
+    background-color: #FF6B6B;
+  }
+
+  /* Stats Cards */
+  .stats-card {
+    @apply bg-white dark:bg-gray-900 rounded-xl shadow-lg border border-gray-200 dark:border-gray-800 p-6 text-center;
+    transition: all 0.3s ease;
+  }
+
+  .stats-card:hover {
+    @apply shadow-xl transform -translate-y-1;
+  }
+
+  .stats-number {
+    @apply text-3xl font-bold text-gray-900 dark:text-white mb-2;
+  }
+
+  .stats-label {
+    @apply text-sm text-gray-500 dark:text-gray-400;
+  }
+
   /* Frontend-style color utilities */
   .bg-frontend-primary {
     background-color: hsl(var(--primary));
   }
-  
+
   .bg-frontend-secondary {
     background-color: hsl(var(--secondary));
   }
-  
+
   .bg-frontend-accent {
     background-color: hsl(var(--accent));
   }
-  
+
   .bg-frontend-success {
     background-color: hsl(var(--contest-success));
   }
-  
+
   .bg-frontend-warning {
     background-color: hsl(var(--contest-warning));
   }
-  
+
   .bg-frontend-info {
     background-color: hsl(var(--contest-info));
   }
-  
+
   .text-frontend-primary {
     color: hsl(var(--primary));
   }
-  
+
   .text-frontend-secondary {
     color: hsl(var(--secondary));
   }
-  
+
   .text-frontend-accent {
     color: hsl(var(--accent));
   }
-  
+
   .text-frontend-success {
     color: hsl(var(--contest-success));
   }
-  
+
   .text-frontend-warning {
     color: hsl(var(--contest-warning));
   }
-  
+
   .text-frontend-info {
     color: hsl(var(--contest-info));
   }
-  
+
   .border-frontend-primary {
     border-color: hsl(var(--primary));
   }
-  
+
   .border-frontend-secondary {
     border-color: hsl(var(--secondary));
+  }
+
+  /* Minimalist utility classes */
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.205 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.556 0 0);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
