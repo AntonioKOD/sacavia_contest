@@ -122,7 +122,7 @@ export function ContestEntriesGrid({ limit = 12, showTitle = true }: ContestEntr
       setVotingStates(prev => ({ ...prev, [entryId]: true }));
 
       // Call real API
-      const response = await contestApi.upvoteEntry(entryId, user.id);
+      const response = await contestApi.upvoteEntry(entryId);
 
       if (response.success) {
         // Update local state

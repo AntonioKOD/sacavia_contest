@@ -1,6 +1,7 @@
 import { getIronSession } from 'iron-session';
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
+import jwt from 'jsonwebtoken';
 
 // Session data interface
 export interface SessionData {
@@ -21,11 +22,47 @@ export const ironOptions = {
   },
 };
 
+// Check for main app JWT token
+export async function checkMainAppJWT(req?: NextRequest): Promise<string | null> {
+  if (!req) return null;
+  
+  try {
+    // Check for payload-token cookie from main app
+    const payloadToken = req.cookies.get('payload-token')?.value;
+    
+    if (payloadToken) {
+      // Verify the JWT token
+      const secret = process.env.PAYLOAD_SECRET || 'your-secret-here';
+      const decoded = jwt.verify(payloadToken, secret) as any;
+      
+      if (decoded && decoded.id) {
+        console.log('✅ Main app JWT token found:', decoded.id);
+        return decoded.id;
+      }
+    }
+  } catch (error) {
+    console.log('❌ Main app JWT token verification failed:', error);
+  }
+  
+  return null;
+}
+
 // Get session from request/response
 export async function getSession(req?: NextRequest, res?: NextResponse): Promise<SessionData> {
   const cookieStore = await cookies();
   
   const session = await getIronSession<SessionData>(cookieStore, ironOptions);
+  
+  // Check for main app JWT token first
+  if (req) {
+    const mainAppUserId = await checkMainAppJWT(req);
+    if (mainAppUserId) {
+      session.userId = mainAppUserId;
+      session.isLoggedIn = true;
+      session.createdAt = Date.now();
+      return session;
+    }
+  }
   
   // Initialize session if it doesn't exist
   if (!session.isLoggedIn) {

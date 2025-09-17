@@ -10,6 +10,7 @@ const api = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true, // Include cookies for authentication
 })
 
 // Types
@@ -122,11 +123,10 @@ export const contestApi = {
   },
 
   // Upvote an entry
-  async upvoteEntry(experienceId: string, userId: string): Promise<UpvoteResponse> {
+  async upvoteEntry(experienceId: string): Promise<UpvoteResponse> {
     try {
       const response = await api.post('/contest/upvote', {
         experienceId,
-        userId,
       })
       return response.data
     } catch (error) {
@@ -136,7 +136,7 @@ export const contestApi = {
   },
 
   // Check upvote status
-  async getUpvoteStatus(experienceId: string, userId?: string): Promise<{
+  async getUpvoteStatus(experienceId: string): Promise<{
     success: boolean
     experienceId: string
     upvotesCount: number
@@ -145,7 +145,7 @@ export const contestApi = {
   }> {
     try {
       const response = await api.get('/contest/upvote', {
-        params: { experienceId, userId },
+        params: { experienceId },
       })
       return response.data
     } catch (error) {
