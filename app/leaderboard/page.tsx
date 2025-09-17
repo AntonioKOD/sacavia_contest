@@ -29,47 +29,6 @@ export default async function LeaderboardPage({ searchParams }: LeaderboardPageP
           </p>
         </div>
 
-        {/* Search and Filters */}
-        <div className="mb-12">
-          <div className="bg-gray-50 rounded-lg p-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div>
-                <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-2">
-                  City
-                </label>
-                <input
-                  type="text"
-                  id="city"
-                  name="city"
-                  defaultValue={city}
-                  placeholder="Filter by city..."
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all duration-200 bg-white text-gray-900 placeholder-gray-500"
-                />
-              </div>
-              <div>
-                <label htmlFor="search" className="block text-sm font-medium text-gray-700 mb-2">
-                  Search
-                </label>
-                <input
-                  type="text"
-                  id="search"
-                  name="q"
-                  defaultValue={q}
-                  placeholder="Search experiences..."
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all duration-200 bg-white text-gray-900 placeholder-gray-500"
-                />
-              </div>
-              <div className="flex items-end">
-                <button
-                  type="submit"
-                  className="w-full bg-black text-white px-6 py-3 text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors duration-200"
-                >
-                  Search
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* Contest Entries */}
         <Suspense fallback={<ContestEntriesSkeleton />}>
