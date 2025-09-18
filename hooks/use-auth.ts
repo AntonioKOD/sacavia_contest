@@ -26,43 +26,6 @@ export function useAuth() {
   const router = useRouter();
   const pathname = usePathname();
 
-  // Check authentication status
-  const checkAuth = useCallback(async () => {
-    try {
-      setAuthState(prev => ({ ...prev, isLoading: true, error: null }));
-      
-      // Make a request to check if user is authenticated
-      const response = await fetch('/api/auth/me', {
-        credentials: 'include', // Include cookies
-      });
-
-      if (response.ok) {
-        const userData = await response.json();
-        setAuthState({
-          user: userData.user,
-          isAuthenticated: true,
-          isLoading: false,
-          error: null,
-        });
-      } else {
-        setAuthState({
-          user: null,
-          isAuthenticated: false,
-          isLoading: false,
-          error: null,
-        });
-      }
-    } catch (error) {
-      console.error('Auth check failed:', error);
-      setAuthState({
-        user: null,
-        isAuthenticated: false,
-        isLoading: false,
-        error: 'Authentication check failed',
-      });
-    }
-  }, []);
-
   // Login function
   const login = useCallback((redirectTo?: string) => {
     const coreAppUrl = process.env.NEXT_PUBLIC_MAIN_APP_URL || 'https://sacavia.com';
@@ -75,12 +38,72 @@ export function useAuth() {
     const loginUrl = `${coreAppUrl}/login?returnTo=${encodeURIComponent(returnTo)}`;
     
     console.log('🔐 Redirecting to login:', loginUrl);
+    console.log('🔐 Return URL after login:', returnTo);
     
-    // Open in new tab or redirect
-    if (!window.open(loginUrl, '_blank')) {
-      window.location.href = loginUrl;
-    }
+    // Redirect to main app login page
+    window.location.href = loginUrl;
   }, [pathname]);
+
+  // Check authentication status
+  const checkAuth = useCallback(async (autoRedirect = true) => {
+    try {
+      setAuthState(prev => ({ ...prev, isLoading: true, error: null }));
+      
+      // Make a request to check if user is authenticated
+      const response = await fetch('/api/auth/me', {
+        credentials: 'include', // Include cookies
+      });
+
+      if (response.ok) {
+        const userData = await response.json();
+        if (userData.isAuthenticated) {
+          setAuthState({
+            user: userData.user,
+            isAuthenticated: true,
+            isLoading: false,
+            error: null,
+          });
+        } else {
+          setAuthState({
+            user: null,
+            isAuthenticated: false,
+            isLoading: false,
+            error: null,
+          });
+          // Auto-redirect to login if not authenticated
+          if (autoRedirect) {
+            console.log('🔐 User not authenticated, redirecting to login...');
+            login();
+          }
+        }
+      } else {
+        setAuthState({
+          user: null,
+          isAuthenticated: false,
+          isLoading: false,
+          error: null,
+        });
+        // Auto-redirect to login if not authenticated
+        if (autoRedirect) {
+          console.log('🔐 User not authenticated, redirecting to login...');
+          login();
+        }
+      }
+    } catch (error) {
+      console.error('Auth check failed:', error);
+      setAuthState({
+        user: null,
+        isAuthenticated: false,
+        isLoading: false,
+        error: 'Authentication check failed',
+      });
+      // Auto-redirect to login on error
+      if (autoRedirect) {
+        console.log('🔐 Auth check failed, redirecting to login...');
+        login();
+      }
+    }
+  }, [login]);
 
   // Logout function
   const logout = useCallback(async (redirectTo?: string) => {
