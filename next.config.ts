@@ -102,16 +102,10 @@ const nextConfig: NextConfig = {
     ];
   },
   
-  // Redirects to main app for certain routes
-  async redirects() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: `${process.env.NEXT_PUBLIC_MAIN_APP_URL || 'https://sacavia.com'}/api/:path*`,
-        permanent: false,
-      },
-    ];
-  },
+  // Note: Removed API redirects to allow contest app to handle its own API routes
+  // async redirects() {
+  //   return [];
+  // },
 };
 
 export default nextConfig;
