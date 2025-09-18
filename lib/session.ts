@@ -64,6 +64,14 @@ export async function getSession(req?: NextRequest, res?: NextResponse): Promise
     }
   }
   
+  // Development mode: Check for test user ID in environment
+  if (process.env.NODE_ENV === 'development' && process.env.TEST_USER_ID) {
+    session.userId = process.env.TEST_USER_ID;
+    session.isLoggedIn = true;
+    session.createdAt = Date.now();
+    return session;
+  }
+  
   // Initialize session if it doesn't exist
   if (!session.isLoggedIn) {
     session.isLoggedIn = false;
@@ -113,8 +121,13 @@ export async function getCurrentUserId(req?: NextRequest, res?: NextResponse): P
 // Save session changes
 export async function saveSession(session: SessionData): Promise<void> {
   const cookieStore = await cookies();
-  await getIronSession<SessionData>(cookieStore, ironOptions);
-  // The session is automatically saved when modified
+  const ironSession = await getIronSession<SessionData>(cookieStore, ironOptions);
+  
+  // Copy session data to iron session
+  Object.assign(ironSession, session);
+  
+  // Save the session
+  await ironSession.save();
 }
 
 // Note: createSealedSession and unsealSession removed as they're not needed
