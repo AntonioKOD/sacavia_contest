@@ -19,6 +19,7 @@ export const ironOptions = {
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax' as const,
     httpOnly: true,
+    domain: process.env.NODE_ENV === 'production' ? '.sacavia.com' : undefined,
   },
 };
 
@@ -64,13 +65,6 @@ export async function getSession(req?: NextRequest, res?: NextResponse): Promise
     }
   }
   
-  // Development mode: Check for test user ID in environment
-  if (process.env.NODE_ENV === 'development' && process.env.TEST_USER_ID) {
-    session.userId = process.env.TEST_USER_ID;
-    session.isLoggedIn = true;
-    session.createdAt = Date.now();
-    return session;
-  }
   
   // Initialize session if it doesn't exist
   if (!session.isLoggedIn) {
